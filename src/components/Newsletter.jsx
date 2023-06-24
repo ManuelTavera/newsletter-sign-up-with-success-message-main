@@ -117,7 +117,7 @@ const Wrapper = styled.div`
   background-color: ${COLORS["white"]};
   width: 900px;
   max-width: 100%;
-  height: 65%;
+  max-height: 630px;
   border-radius: 35px;
   display: flex;
   overflow: hidden;
