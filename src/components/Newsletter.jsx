@@ -3,6 +3,7 @@ import * as Form from "@radix-ui/react-form";
 
 import { COLORS } from "../../constant";
 import Benefit from "./Benefit";
+import Button from "./Button";
 import desktopImage from "../assets/desktop.svg";
 
 const features = [
@@ -11,7 +12,16 @@ const features = [
   "And much more!",
 ];
 
-function Newsletter() {
+function Newsletter({ handleEmail, handleDialog, email }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleDialog(true);
+  };
+
+  const onEmailChange = (e) => {
+    handleEmail(e.target.value);
+  };
+
   return (
     <Wrapper>
       <LetterWrapper>
@@ -22,7 +32,7 @@ function Newsletter() {
             <Benefit feature={item} key={index} />
           ))}
         </BenefitWrapper>
-        <FormRoot>
+        <FormRoot onSubmit={handleSubmit}>
           <FormField>
             <LabelWrapper>
               <FormLabel>Email address</FormLabel>
@@ -33,7 +43,7 @@ function Newsletter() {
                 Please enter your email
               </FormMessage>
             </LabelWrapper>
-            <Form.Control asChild>
+            <Form.Control asChild onChange={onEmailChange} value={email}>
               <Input type="email" required placeholder="email@company.com" />
             </Form.Control>
           </FormField>
@@ -101,33 +111,6 @@ const Input = styled.input`
       outline-color: ${COLORS["primary"]};
     }
   }
-`;
-
-const Button = styled.button`
-  border: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 56px;
-  background-color: ${COLORS["darkSlateGray"]};
-  color: ${COLORS["white"]};
-  width: 100%;
-  border-radius: 7px;
-  font-size: ${16 / 16}rem;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(
-      to right,
-      hsl(347, 100%, 66%),
-      ${COLORS["primary"]},
-      hsl(13, 100%, 62%)
-    );
-    box-shadow: 0px 10px 15px 1px hsl(4, 100%, 80%);
-    cursor: pointer;
-    transition: all 0.8s ease-out;
-  }
-
 `;
 
 const Wrapper = styled.div`
