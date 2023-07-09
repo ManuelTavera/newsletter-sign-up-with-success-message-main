@@ -5,6 +5,8 @@ import { COLORS } from "../../constant";
 import Benefit from "./Benefit";
 import Button from "./Button";
 import desktopImage from "../assets/desktop.svg";
+import mobileImage from "../assets/mobile.svg";
+import { QUERIES } from "../../constant";
 
 const features = [
   "Product discovery and building what matters",
@@ -54,6 +56,7 @@ function Newsletter({ handleEmail, handleDialog, email }) {
       </LetterWrapper>
       <ImageWrapper>
         <ImageDesktop src={desktopImage} alt="Desktop illustration" />
+        <ImageMobile src={mobileImage} alt="Mobile illustration" />
       </ImageWrapper>
     </Wrapper>
   );
@@ -126,6 +129,16 @@ const Wrapper = styled.div`
   & > * {
     font-family: "Roboto", sans-serif;
   }
+
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    flex-direction: column-reverse;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    max-height: 900px;
+    border-radius: 0;
+    padding: 0;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -134,6 +147,11 @@ const ImageWrapper = styled.div`
   justify-content: flex-end;
   flex-basis: 50%;
   margin-left: -20px;
+
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    margin: 0;
+    flex: revert;
+  }
 `;
 
 const ImageDesktop = styled.img`
@@ -141,6 +159,19 @@ const ImageDesktop = styled.img`
   object-fit: cover;
   border-radius: 20px;
   overflow: hidden;
+
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    display: none;
+  }
+`;
+
+const ImageMobile = styled.img`
+  display: none;
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    display: block;
+    object-fit: cover; 
+    width: 100%;
+  }
 `;
 
 const LetterWrapper = styled.div`
@@ -150,12 +181,20 @@ const LetterWrapper = styled.div`
   padding: 50px 40px;
   justify-content: space-evenly;
   flex-basis: 50%;
+
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    padding: 20px;
+  }
 `;
 
 const Header = styled.h1`
   font-size: ${55 / 16}rem;
   color: ${COLORS["darkSlateGray"]};
   font-weight: 700;
+
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    font-size: ${42 / 16}rem;
+  }
 `;
 
 const Body = styled.p`
