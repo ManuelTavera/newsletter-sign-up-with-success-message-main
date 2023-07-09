@@ -4,6 +4,7 @@ import * as RuiDialog from "@radix-ui/react-dialog";
 import checkIcon from "../assets/icon-list.svg";
 import Button from "./Button";
 import { COLORS } from "../../constant";
+import { QUERIES } from "../../constant";
 
 function Dialog({ open, onOpenChange, email, handleEmail }) {
   const handleOpenChange = (open) => {
@@ -26,7 +27,7 @@ function Dialog({ open, onOpenChange, email, handleEmail }) {
             subscription.
           </DialogDescription>
           <RuiDialog.Close asChild>
-            <Button>Dismiss message</Button>
+            <SubmitButton>Dismiss message</SubmitButton>
           </RuiDialog.Close>
         </DialogContent>
       </RuiDialog.Portal>
@@ -60,6 +61,13 @@ const DialogContent = styled(RuiDialog.Content)`
   &:focus {
     outline: none;
   }
+
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    height: 100%;
+    border-radius: 0;
+    justify-content: revert;
+    padding: 20px;
+  }
 `;
 
 const DialogTitle = styled(RuiDialog.Title)`
@@ -68,6 +76,11 @@ const DialogTitle = styled(RuiDialog.Title)`
   color: ${COLORS["darkSlateGray"]};
   font-weight: 700;
   line-height: 1;
+
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    margin-bottom: 25px;
+    font-size: ${40 / 16}rem;
+  }
 `;
 
 const DialogDescription = styled(RuiDialog.Description)`
@@ -79,10 +92,23 @@ const DialogDescription = styled(RuiDialog.Description)`
 const IconWrapper = styled.div`
   height: 50px;
   width: 50px;
+
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    height: 60px;
+    width: 60px;
+    margin-top: 125px;
+    margin-bottom: 50px;
+  }
 `;
 
 const Icon = styled.img`
   height: 100%;
+`;
+
+const SubmitButton = styled(Button)`
+  @media screen and (${QUERIES["phoneAndSmaller"]}) {
+    margin-top: auto;
+  }
 `;
 
 export default Dialog;
